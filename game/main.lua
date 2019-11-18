@@ -25,8 +25,8 @@ function love.update()
 end
 
 function love.touchpressed( id, x, y, dx, dy, pressure )
+	--if touchscreen press if within bounds of button, play the sound effect
 	if x >= 85 and x <= 235 and y >= 45 and y <= 195 then
-		print("bruh")
 		clicked = true
 		sound:play()
 	end
@@ -36,17 +36,22 @@ function love.touchreleased( id, x, y, dx, dy, pressure )
 	clicked = false
 end
 
-function love.draw()	
+function love.draw()
+	--top screen
 	love.graphics.setScreen("top")
+	--set depth to 10 pixels "in to" the screen
 	love.graphics.setDepth(10)
 	love.graphics.draw(meme1, 400/2, 240/2, 0, 1, 1, meme1:getWidth()/2, meme1:getHeight()/2)
+	--set depth to 5 pixels "out of" the screen
 	love.graphics.setDepth(-5)
 	love.graphics.draw(meme2, 0,0)
+	--set depth to 6 pixels "out of" the screen
 	love.graphics.setDepth(-6)
 	love.graphics.draw(meme3, 0,0)
 	
 	--bottom screen
 	love.graphics.setScreen("bottom")
+	--draw button sprite based off of if clicked is true or not
 	if clicked == true then
 		love.graphics.draw(buttonUnpressed, 320/2, 240/2, 0, 1, 1, 150/2,150/2)
 	else
